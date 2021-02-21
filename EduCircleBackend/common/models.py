@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 
 class BaseModel(models.Model):
     # Unique ID as the Primary Key instead of the default Integer Primary Key
-    uid = models.UUIDField(db_index=True, primary_key=True, default=uuid.uuid4, editable=False,
+    id = models.UUIDField(db_index=True, primary_key=True, default=uuid.uuid4, editable=False,
                            verbose_name='unique id')
 
     created_at = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name='creation date')
