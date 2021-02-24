@@ -23,6 +23,7 @@ class User(AbstractBaseUser, PermissionsMixin,BaseModel):
     email = models.EmailField(_('Email Address'), max_length=255, unique=True)
     phone_number = models.CharField(_('Phone Number'), max_length=12, blank=True, default='')
     address = models.CharField(_('Address'), max_length=150, default='', blank=True)
+    profile_image = models.ImageField(_('Profile Image'),blank=True, null=True, upload_to='images/')
 
 
     # For admin side access
