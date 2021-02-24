@@ -75,6 +75,7 @@ class CreateUserAPIView(APIView):
             "first_name":sdf,
             "last_name":sdfkh,
             "password":sdfg
+            "profile_image": <profile_image>
         }
         """
         user = request.data
