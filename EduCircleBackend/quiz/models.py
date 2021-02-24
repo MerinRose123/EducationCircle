@@ -16,7 +16,7 @@ PAPER_TYPES = (
 )
 
 QUESTION_TYPES = (
-    ("MCQ", "Nultiple Choice"),
+    ("MCQ", "Multiple Choice"),
     ("true_false", "True or False"),
     ("numeric", "Numerical"),
 )
@@ -69,12 +69,12 @@ class Question(BaseModel):
 
     question_type = models.CharField(max_length=100, choices=QUESTION_TYPES,default="MCQ",)
 
-    choice1 = models.CharField(_('A'), max_length=200, default='')
-    choice2 = models.CharField(_('B'), max_length=200, default='')
-    choice3 = models.CharField(_('C'),max_length=200, default='')
-    choice4 = models.CharField(_('D'), max_length=200, default='')
+    choice1 = models.CharField(_('choice1'), max_length=200, default='')
+    choice2 = models.CharField(_('choice2'), max_length=200, default='')
+    choice3 = models.CharField(_('choice3'),max_length=200, default='')
+    choice4 = models.CharField(_('choice4'), max_length=200, default='')
 
-    answer = models.CharField(max_length=200, default='c1')
+    answer = models.CharField(max_length=200, default='choice1')
 
     # many to many Link to category
     categories = models.ManyToManyField('Category', blank=True, related_name='category')
@@ -145,6 +145,3 @@ class TestTaker(BaseModel):
 
     def __str__(self):
         return self.title
-
-
-# TODO : Add fixture to load Exam Types, categories and quiz. 

@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(blank=True, default='', max_length=1500, null=True, verbose_name='Description')),
                 ('title', models.CharField(blank=True, max_length=180, null=True, verbose_name='Title')),
                 ('question_text', models.CharField(blank=True, default='', max_length=2000, null=True, verbose_name='Question text')),
-                ('question_type', models.CharField(choices=[('MCQ', 'Nultiple Choice'), ('true_false', 'True or False'), ('numeric', 'Numerical')], default='MCQ', max_length=100)),
+                ('question_type', models.CharField(choices=[('MCQ', 'Multiple Choice'), ('true_false', 'True or False'), ('numeric', 'Numerical')], default='MCQ', max_length=100)),
                 ('choice1', models.CharField(default='', max_length=200, verbose_name='A')),
                 ('choice2', models.CharField(default='', max_length=200, verbose_name='B')),
                 ('choice3', models.CharField(default='', max_length=200, verbose_name='C')),
