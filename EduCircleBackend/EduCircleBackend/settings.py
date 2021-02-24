@@ -170,3 +170,66 @@ JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
     'JWT_AUTH_COOKIE': None,
 }
+
+# Logging 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': u'%(asctime)s %(levelname)s %(name)s %(message)s'
+        },
+        'simple': {
+            'format': u'%(asctime)s %(levelname)s %(name)s %(status)s %(elapsed_time)s %(path)s %(token)s %(company)s'
+                      u' %(domain_url)s'
+        },
+        'request': {
+            'format': u'%(asctime)s %(levelname)s %(elapsed_time)s %(name)s %(path)s %(token)s'
+        },
+    },
+    
+    'handlers': {
+        'default': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/debug.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'request_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/django_request.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'info_request_handler': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/django_request.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'request',
+        },
+
+    },
+    'loggers': {
+        '': {
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        'django.request': {  # Stop SQL debug from logging to main logger
+            'handlers': ['request_handler'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'common.middleware': {
+            'handlers': ['info_request_handler'],
+            'level': 'INFO',
+            'propagate': False
+        },
+    }
+}
