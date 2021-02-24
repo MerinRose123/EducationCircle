@@ -1,0 +1,23 @@
+[{
+	"model": "common.news",
+	"pk": "2665868e-3667-4935-a6b0-d88ba0dc26d1",
+	"fields": {
+		"created_at": "2021-02-24T16:15:52.598Z",
+		"modified_at": "2021-02-24T16:15:52.598Z",
+		"description": "In the morning section, the chemistry was comparatively tougher with unusual questions from lab manual while in the afternoon shift there were tricky questions in the mathematics section. The internal choice came as a respite to students claim experts.",
+		"title": "JEE Main Day 2 analysis: Experts say exam easier than previous years, math can be deciding factor",
+		"created_by": "e814fcd6-b059-47db-afef-7242830a89e5",
+		"site_link": "https://indianexpress.com/article/education/jee-main-day-2-analysis-exam-easier-than-previous-years-math-can-be-deciding-factor-jeemain-nic-in-7203117/"
+	}
+}, {
+	"model": "common.news",
+	"pk": "8147a9dc-724a-40ca-ad96-067ec3c99bd2",
+	"fields": {
+		"created_at": "2021-02-24T16:15:38.718Z",
+		"modified_at": "2021-02-24T16:15:38.718Z",
+		"description": "The centre is coming out with the CUCET, for which several committee meetings have been held and it will be finalised shortly. Once that is done, we will be having weightage for both CUCET and board examinations with 50 per cent for each, said PC Joshi.",
+		"title": "Delhi University admissions 2021 to be 50% on CUCET, 50% on board marks",
+		"created_by": null,
+		"site_link": "https://indianexpress.com/article/education/delhi-university-admissions-2021-to-be-50-on-cucet-50-on-board-marks-du-ac-in-7202738/"
+	}
+}]

@@ -1,0 +1,51 @@
+[{
+	"model": "quiz.category",
+	"pk": "0ccecf60-cc0a-4065-ba58-1d5ccca3c9c1",
+	"fields": {
+		"created_at": "2021-02-24T16:51:47.125Z",
+		"modified_at": "2021-02-24T16:51:47.125Z",
+		"description": null,
+		"title": "Aptitude",
+		"key": "aptitude"
+	}
+}, {
+	"model": "quiz.category",
+	"pk": "2a8b733c-ffff-41ea-860b-284d6c77bac7",
+	"fields": {
+		"created_at": "2021-02-24T16:52:03.361Z",
+		"modified_at": "2021-02-24T16:52:03.361Z",
+		"description": null,
+		"title": "Current Affairs",
+		"key": "current_affairs"
+	}
+}, {
+	"model": "quiz.category",
+	"pk": "4599660e-cd83-4295-83f4-5fbbaa76358f",
+	"fields": {
+		"created_at": "2021-02-24T16:52:16.208Z",
+		"modified_at": "2021-02-24T16:52:16.208Z",
+		"description": null,
+		"title": "History",
+		"key": "history"
+	}
+}, {
+	"model": "quiz.category",
+	"pk": "4eb8b234-151f-43b1-9a2f-ea6bf7466b5a",
+	"fields": {
+		"created_at": "2021-02-24T16:51:35.657Z",
+		"modified_at": "2021-02-24T16:51:35.658Z",
+		"description": null,
+		"title": "Mathematics",
+		"key": "mathematics"
+	}
+}, {
+	"model": "quiz.category",
+	"pk": "69edbfd8-0f36-4f4e-baf6-81eb77c77979",
+	"fields": {
+		"created_at": "2021-02-24T16:55:54.393Z",
+		"modified_at": "2021-02-24T16:55:54.393Z",
+		"description": null,
+		"title": "Others",
+		"key": "other"
+	}
+}]

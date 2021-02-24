@@ -1,0 +1,37 @@
+[{
+	"model": "quiz.examtype",
+	"pk": "701707ed-3516-4faa-a5bb-106178268410",
+	"fields": {
+		"created_at": "2021-02-24T16:54:04.181Z",
+		"modified_at": "2021-02-24T16:54:04.181Z",
+		"description": null,
+		"title": "SSC",
+		"key": "ssc",
+		"site_link": "https://ssc.nic.in/",
+		"community_leader": "e814fcd6-b059-47db-afef-7242830a89e5"
+	}
+}, {
+	"model": "quiz.examtype",
+	"pk": "f460da81-fa2e-49ce-b052-5b51615881e6",
+	"fields": {
+		"created_at": "2021-02-24T16:55:19.509Z",
+		"modified_at": "2021-02-24T16:55:19.509Z",
+		"description": null,
+		"title": "RRB",
+		"key": "rrb",
+		"site_link": "http://www.rrbcdg.gov.in/",
+		"community_leader": "e814fcd6-b059-47db-afef-7242830a89e5"
+	}
+}, {
+	"model": "quiz.examtype",
+	"pk": "fb23b30a-643b-4af2-a8ea-1ef642a9bdb0",
+	"fields": {
+		"created_at": "2021-02-24T16:54:19.172Z",
+		"modified_at": "2021-02-24T16:54:19.172Z",
+		"description": null,
+		"title": "General",
+		"key": "general",
+		"site_link": null,
+		"community_leader": "e814fcd6-b059-47db-afef-7242830a89e5"
+	}
+}]

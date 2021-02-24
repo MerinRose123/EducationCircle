@@ -1,0 +1,35 @@
+[{
+	"model": "quiz.question",
+	"pk": "afd7587d-eff0-4c08-ade5-8d0599c43ae3",
+	"fields": {
+		"created_at": "2021-02-24T17:08:01.386Z",
+		"modified_at": "2021-02-24T17:08:01.386Z",
+		"description": "How many questions are to be asked by the Centre during the collection of data for Census 2021?",
+		"title": "Census",
+		"question_text": "How many questions are to be asked by the Centre during the collection of data for Census 2021?",
+		"question_type": "MCQ",
+		"choice1": "21",
+		"choice2": "29",
+		"choice3": "31",
+		"choice4": "12",
+		"answer": "choice3",
+		"categories": []
+	}
+}, {
+	"model": "quiz.question",
+	"pk": "e010572e-4b2b-4ed1-90a6-b2a589e81a4b",
+	"fields": {
+		"created_at": "2021-02-24T17:06:05.852Z",
+		"modified_at": "2021-02-24T17:08:13.208Z",
+		"description": "Which food-delivery start-up recently acquired Uber’s food delivery platform, Uber Eats in India?",
+		"title": "Uber",
+		"question_text": "Which food-delivery start-up recently acquired Uber’s food delivery platform, Uber Eats in India?",
+		"question_type": "MCQ",
+		"choice1": "Zomato",
+		"choice2": "Swiggy",
+		"choice3": "Faasos",
+		"choice4": "Domino’s",
+		"answer": "choice1",
+		"categories": []
+	}
+}]
