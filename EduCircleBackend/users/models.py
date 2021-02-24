@@ -39,7 +39,9 @@ class User(AbstractBaseUser, PermissionsMixin,BaseModel):
     REQUIRED_FIELDS = ['username']
 
     objects = UserManager()
-
+    
+    # TODO : Add saved questions and send notifications flag
+    
     def __str__(self):
         return self.username
 

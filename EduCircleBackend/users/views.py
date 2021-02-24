@@ -40,6 +40,7 @@ def authenticate_user(request):
                 user_details['name'] = "%s %s" % (
                     user.first_name, user.last_name)
                 user_details['token'] = token
+                user_details["id"] = user.id
                 login(request, user)
                 user_logged_in.send(sender=user.__class__,
                                     request=request, user=user)
@@ -53,15 +54,6 @@ def authenticate_user(request):
     except KeyError:
         res = {'error': 'please provide a email and a password'}
         return Response(res)
-
-
-class HelloView(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-        print(request.user)
-        content = {'message': 'Hello, World!'}
-        return Response(content)
 
 
 class CreateUserAPIView(APIView):
