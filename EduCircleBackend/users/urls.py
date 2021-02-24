@@ -1,6 +1,6 @@
 from django.urls import path
 # from rest_framework_simplejwt import views as jwt_views
-from .views import CreateUserAPIView, UserRetrieveUpdateAPIView, authenticate_user
+from users.views import CreateUserAPIView, UserRetrieveUpdateAPIView, authenticate_user
 
 urlpatterns = [
     path('token', authenticate_user),

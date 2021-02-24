@@ -10,7 +10,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from common import constants as common_constants
-from common.serializers import FeedBackSerializer, ComplaintSerializer
+from common.serializers import FeedBackSerializer, ComplaintSerializer, NewsSerializer
+from common.models import News
 
 # Initialize logger
 logger = logging.getLogger(__name__)
@@ -87,3 +88,17 @@ class ComplaintView(GenericAPIView):
             logger.error('Error in ComplaintView.Error - {}'.format(str(e)))
             raise ValidationError(e, 400)
 
+
+class NewsListView(ListAPIView):
+    """
+    Model view to list the latest news
+    """
+    permission_classes = (IsAuthenticated, )
+    serializer_class = NewsSerializer
+
+    def get_queryset(self):
+        """
+        List atmost 20 news entries as latest first.
+        """
+        queryset = News.objects.filter().order_by('-created_at')[:20]
+        return queryset
