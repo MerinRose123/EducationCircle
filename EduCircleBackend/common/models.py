@@ -35,7 +35,7 @@ class FeedBack(BaseModel):
 
     rating = models.CharField(_('Rating'), max_length=100, blank=True,null=True, default='5')
 
-    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True, default='')
 
     class Meta:
         verbose_name_plural = 'FeedBacks'
@@ -48,7 +48,7 @@ class Complaint(BaseModel):
 
     from users.models import User 
 
-    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True, default='')
 
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='complaint_created_by',
                                    null=True, blank=True)
@@ -69,7 +69,7 @@ class News(BaseModel):
     """
     from users.models import User 
 
-    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True, default='')
 
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='news_created_by',
                                 null=True, blank=True)
@@ -90,7 +90,7 @@ class DiscussionQuestion(BaseModel):
     from users.models import User 
     from quiz.models import ExamType
 
-    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True, default='')
 
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='question_created_by',
                                 null=True, blank=True)
@@ -104,7 +104,7 @@ class DiscussionQuestion(BaseModel):
         verbose_name_plural = 'Discussions'
 
     def __str__(self):
-        return self.title
+        return self.title if self.title else ''
 
 
 class Answer(BaseModel):
@@ -113,17 +113,21 @@ class Answer(BaseModel):
     """
     from users.models import User 
 
-    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=1000, null=True, blank=True, default='')
 
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='answer_created_by',
                                 null=True, blank=True)
 
+    question = models.ForeignKey(DiscussionQuestion, on_delete=models.CASCADE, related_name='answer_question',
+                            null=True, blank=False)
+
+
     text = models.CharField(_('Answer text'), max_length=2000, blank=True,null=True, default='')
 
-    up_votes = models.IntegerField(_('Up votes'), default=0)
-    down_votes = models.IntegerField(_('Down votes'), default=0)
+    # up_votes = models.IntegerField(_('Up votes'), default=0)
+    # down_votes = models.IntegerField(_('Down votes'), default=0)
 
 
     def __str__(self):
-        return self.title
+        return self.text if self.title else ''
 

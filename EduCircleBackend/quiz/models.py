@@ -25,7 +25,7 @@ class Category(BaseModel):
     """
     The categories of the question. eg: maths, history etc
     """
-    title = models.CharField(_('Title'), max_length=180, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=180, null=True, blank=True, default='')
 
     key = models.CharField(_('Key'), max_length=180, null=True, blank=True)
 
@@ -43,7 +43,7 @@ class ExamType(BaseModel):
     """
     from users.models import User
 
-    title = models.CharField(_('Title'), max_length=180, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=180, null=True, blank=True, default='')
 
     key = models.CharField(_('Key'), max_length=180, null=True, blank=True)
 
@@ -63,7 +63,7 @@ class Question(BaseModel):
     """
     The questions
     """
-    title = models.CharField(_('Title'), max_length=180, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=180, null=True, blank=True, default='')
 
     question_text = models.CharField(_('Question text'), max_length=2000, blank=True,null=True, default='')
 
@@ -91,7 +91,7 @@ class Test(BaseModel):
     """
     Test can be a mock test, a previous year question or a quiz
     """
-    title = models.CharField(_('Title'), max_length=180, null=True, blank=True)
+    title = models.CharField(_('Title'), max_length=180, null=True, blank=True, default='')
 
     # Paper Type: mock_test, previous year question paper or quiz
     paper_type = models.CharField(max_length=100, choices=PAPER_TYPES,default="quiz")
@@ -144,4 +144,4 @@ class TestTaker(BaseModel):
         verbose_name_plural = 'Test Takers'
 
     def __str__(self):
-        return self.title
+        return self.user
