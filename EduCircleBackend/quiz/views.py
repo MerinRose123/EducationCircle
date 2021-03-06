@@ -51,12 +51,11 @@ class ExamYearRetrieveView(ListAPIView):
     permission_classes = (IsAuthenticated, )
     serializer_class = TestYearSerializer
 
-    def get(self, request, *args, **kwargs):
+    def get_queryset(self, *args, **kwargs):
         """
         retrieves the available years for the question papers for a particular exam type.
         """
-        print(self.request)
-        exam_type = self.request.args.get('exam_type', 'SSC')
-        exam_type = 'SSC'
+        type_key = self.request.GET.get('exam_type', 'ssc')
+        exam_type = ExamType.objects.filter(key=type_key).first()
         queryset = Test.objects.filter(exam_type=exam_type, paper_type='prev_year').all().order_by('year')
         return queryset

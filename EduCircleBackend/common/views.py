@@ -10,8 +10,10 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from common import constants as common_constants
-from common.serializers import FeedBackSerializer, ComplaintSerializer, NewsSerializer
-from common.models import News
+from common.serializers import FeedBackSerializer, ComplaintSerializer, NewsSerializer, \
+    DiscussionQuestionSerializer, DiscussionAnswerSerializer
+from common.models import News, DiscussionQuestion, Answer
+from quiz.models import ExamType
 
 # Initialize logger
 logger = logging.getLogger(__name__)
@@ -101,4 +103,75 @@ class NewsListView(ListAPIView):
         List atmost 20 news entries as latest first.
         """
         queryset = News.objects.filter().order_by('-created_at')[:20]
+        return queryset
+
+# Discussion platform related
+class CreateQuestionAPIView(GenericAPIView):
+    
+    permission_classes = (IsAuthenticated, )
+
+    def post(self, request):
+        """
+        Params: {
+            "created_by": "bdcbd239-619c-4b6c-9ec2-6c73c3d9a66b",
+            "question_text": "What are the topics for SSC",
+            "title": "SSC Topics",
+            "exam_type": "701707ed-3516-4faa-a5bb-106178268410"
+        }
+        """
+        data = request.data
+        serializer = DiscussionQuestionSerializer(data=data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class CreateAnswerAPIView(GenericAPIView):
+    
+    permission_classes = (IsAuthenticated, )
+
+    def post(self, request):
+        """
+        Params: {
+            "title"
+            "text"
+            "question"
+        }
+        """
+        data = request.data
+        serializer = DiscussionAnswerSerializer(data=data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class DiscussionQuestionListView(ListAPIView):
+    """
+    List questions
+    """
+    permission_classes = (IsAuthenticated, )
+    serializer_class = DiscussionQuestionSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        """
+        List questions
+        """
+        type_key = self.request.GET.get('exam_type', 'ssc')
+        exam_type = ExamType.objects.filter(key=type_key).first()
+        queryset = DiscussionQuestion.objects.filter(exam_type=exam_type).all().order_by('-created_at')
+        return queryset
+
+class DiscussionAnswerListView(ListAPIView):
+    """
+    List questions
+    """
+    permission_classes = (IsAuthenticated, )
+    serializer_class = DiscussionAnswerSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        """
+        List questions
+        """
+        question_id = self.request.GET.get('question_id', None)
+        question = DiscussionQuestion.objects.filter(id=question_id).first()
+        queryset = Answer.objects.filter(question=question).all().order_by('-created_at')
         return queryset
