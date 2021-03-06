@@ -1,19 +1,27 @@
 import jwt
-from django.shortcuts import render
+import logging
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from django.contrib.auth import authenticate, login
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.generics import RetrieveUpdateAPIView
-from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.signals import user_logged_in
+from django.core.exceptions import ValidationError
+from django.shortcuts import render
+from rest_framework import status
+from rest_framework_jwt.settings import api_settings
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import ListCreateAPIView, UpdateAPIView, RetrieveAPIView, GenericAPIView, DestroyAPIView, ListAPIView, CreateAPIView
+from rest_framework.generics import RetrieveUpdateAPIView
+from rest_framework.parsers import MultiPartParser
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from EduCircleBackend import settings
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer, UserListSerializer
 from users.models import User
+from users.utils import validate_user_based_on_uid
+
+# Initialize logger
+logger = logging.getLogger(__name__)
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -41,6 +49,9 @@ def authenticate_user(request):
                     user.first_name, user.last_name)
                 user_details['token'] = token
                 user_details["id"] = user.id
+                user_details["email"] = user.email
+                user_details["username"] = user.username
+                user_details["profile_image"] = user.profile_image if user.profile_image else ""
                 login(request, user)
                 user_logged_in.send(sender=user.__class__,
                                     request=request, user=user)
@@ -59,6 +70,7 @@ def authenticate_user(request):
 class CreateUserAPIView(APIView):
     # Allow any user (authenticated or not) to access this url 
     permission_classes = (AllowAny,)
+    parser_classes = (MultiPartParser,)
 
     def post(self, request):
         """
@@ -71,31 +83,55 @@ class CreateUserAPIView(APIView):
         }
         """
         user = request.data
-        serializer = UserSerializer(data=user)
+        serializer = UserSerializer(data=user, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 
     # Allow only authenticated users to access this url
     permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
+    parser_classes = (MultiPartParser,)
 
     def get(self, request, *args, **kwargs):
-        # serializer to handle turning our `User` object into something that
-        # can be JSONified and sent to the client.
-        serializer = self.serializer_class(request.user)
+        try:
+            user_id =  request.GET.get('user_id', None)
+            user_instance = User.objects.get(id=user_id)
+            serializer = self.serializer_class(user_instance, context={'request': request})
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.error('Error in UserRetrieveUpdateAPIView.Error - {}'.format(str(e)))
+            raise ValidationError(e, 400)
 
     def put(self, request, *args, **kwargs):
-        serializer_data = request.data.get('user', {})
+        serializer_data = request.data
+        user_id =  request.GET.get('user_id', None)
+        user_instance = User.objects.get(id=user_id)
 
         serializer = UserSerializer(
-            request.user, data=serializer_data, partial=True
+            instance = user_instance, data=serializer_data, partial=True, context={'request': request}
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        print(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    
+class UserListView(ListAPIView):
+    """
+    Model view to list the users
+    """
+    permission_classes = (IsAuthenticated, )
+    serializer_class = UserListSerializer
+
+    def get_queryset(self):
+        """
+        List atmost 30 news entries as latest first.
+        """
+        queryset = User.objects.filter().order_by('-created_at')[:30]
+        return queryset
