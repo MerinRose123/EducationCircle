@@ -1,0 +1,31 @@
+[{
+	"model": "quiz.test",
+	"pk": "278db243-8cf0-47c2-b723-7f1f1e27d178",
+	"fields": {
+		"created_at": "2021-02-25T07:03:47.406Z",
+		"modified_at": "2021-02-25T07:03:47.406Z",
+		"description": "Previous Year Question",
+		"title": "SSC 2020",
+		"paper_type": "prev_year",
+		"no_questions": 2,
+		"exam_type": "701707ed-3516-4faa-a5bb-106178268410",
+		"category": null,
+		"year": 2020,
+		"questions": ["afd7587d-eff0-4c08-ade5-8d0599c43ae3", "e010572e-4b2b-4ed1-90a6-b2a589e81a4b"]
+	}
+}, {
+	"model": "quiz.test",
+	"pk": "c155122d-6915-4669-bf12-a832c2004782",
+	"fields": {
+		"created_at": "2021-02-25T06:14:48.402Z",
+		"modified_at": "2021-02-25T06:14:48.402Z",
+		"description": "Mock test for ssc",
+		"title": "Mock Test SSC",
+		"paper_type": "mock_test",
+		"no_questions": 2,
+		"exam_type": "701707ed-3516-4faa-a5bb-106178268410",
+		"category": null,
+		"year": null,
+		"questions": ["afd7587d-eff0-4c08-ade5-8d0599c43ae3", "e010572e-4b2b-4ed1-90a6-b2a589e81a4b"]
+	}
+}]
