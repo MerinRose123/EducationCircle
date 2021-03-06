@@ -10,8 +10,8 @@ from django.core.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework import status
 
-from quiz.serializers import CatgorySerializer, ExamTypeSerializer
-from quiz.models import Category, ExamType
+from quiz.serializers import CatgorySerializer, ExamTypeSerializer, TestYearSerializer
+from quiz.models import Category, ExamType, Test
 
 
 class CategoryListView(ListAPIView):
@@ -41,4 +41,22 @@ class ExamTypeListView(ListAPIView):
         List exam types
         """
         queryset = ExamType.objects.filter().all()
+        return queryset
+    
+
+class ExamYearRetrieveView(ListAPIView):
+    """
+    Retrieves the available years for the question papers for a particular exam type.
+    """
+    permission_classes = (IsAuthenticated, )
+    serializer_class = TestYearSerializer
+
+    def get(self, request, *args, **kwargs):
+        """
+        retrieves the available years for the question papers for a particular exam type.
+        """
+        print(self.request)
+        exam_type = self.request.args.get('exam_type', 'SSC')
+        exam_type = 'SSC'
+        queryset = Test.objects.filter(exam_type=exam_type, paper_type='prev_year').all().order_by('year')
         return queryset

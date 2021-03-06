@@ -15,3 +15,12 @@ class ExamTypeSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = ExamType
         fields = ('title', 'key', 'description', 'site_link', 'community_leader')
+
+class TestYearSerializer(serializers.ModelSerializer):
+    """
+    Retrieves the yearwise test ids for a particular exam type
+    """
+
+    class Meta(object):
+        model = Test
+        fields = ('id', 'title', 'year')
