@@ -24,8 +24,25 @@
 		"paper_type": "mock_test",
 		"no_questions": 2,
 		"exam_type": "701707ed-3516-4faa-a5bb-106178268410",
-		"category": null,
+		"category": "2a8b733c-ffff-41ea-860b-284d6c77bac7",
 		"year": null,
 		"questions": ["afd7587d-eff0-4c08-ade5-8d0599c43ae3", "e010572e-4b2b-4ed1-90a6-b2a589e81a4b"]
 	}
-}]
+}, {
+	"model": "quiz.test",
+	"pk": "c155122d-6915-4669-bf12-a832c2004783",
+	"fields": {
+		"created_at": "2021-02-25T06:14:48.402Z",
+		"modified_at": "2021-02-25T06:14:48.402Z",
+		"description": "Current Affairs",
+		"title": "Current Affairs Test",
+		"paper_type": "quiz",
+		"no_questions": 2,
+		"exam_type": null,
+		"category": "2a8b733c-ffff-41ea-860b-284d6c77bac7",
+		"year": null,
+		"questions": ["afd7587d-eff0-4c08-ade5-8d0599c43ae3", "e010572e-4b2b-4ed1-90a6-b2a589e81a4b"]
+	}
+}
+
+]
