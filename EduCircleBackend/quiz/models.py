@@ -99,7 +99,7 @@ class Test(BaseModel):
     # The number of questions in the test
     no_questions = models.IntegerField(_('No of Questions'), null=True, blank=True, default=0)
 
-    # If the test type is mock test or previous year question
+    # If the test type is mock test or previous year question then exam type is filled
     exam_type = models.ForeignKey(ExamType, on_delete=models.SET_NULL, related_name='exam_type',
                                    null=True, blank=True)
     
