@@ -144,4 +144,4 @@ class TestTaker(BaseModel):
         verbose_name_plural = 'Test Takers'
 
     def __str__(self):
-        return self.user
+        return str(self.test.title) 

@@ -1,18 +1,29 @@
 import binascii
 import os
-import io
+from io import BytesIO
+from PIL import Image
 
 from django.db.models import Q
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.core.files import File
 
 
 from common.models import BaseModel
 from django.contrib.auth.models import UserManager
 
 
+def compress(image):
+    im = Image.open(image)
+    # create a BytesIO object
+    im_io = BytesIO() 
+    # save image to BytesIO object
+    im.save(im_io, 'JPEG', quality=10) 
+    # create a django-friendly Files object
+    new_image = File(im_io, name=image.name)
+    return new_image
 
 
 class User(AbstractBaseUser, PermissionsMixin,BaseModel):
@@ -44,6 +55,16 @@ class User(AbstractBaseUser, PermissionsMixin,BaseModel):
     
     def __str__(self):
         return self.username
+
+    def save(self, *args, **kwargs):
+        # call the compress function if image is uploaded
+        if self.profile_image:
+            new_image = compress(self.profile_image)
+            # set self.image to new_image
+            self.profile_image = new_image
+
+        # save
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "User"

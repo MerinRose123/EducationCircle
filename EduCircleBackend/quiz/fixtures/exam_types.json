@@ -7,8 +7,7 @@
 		"description": null,
 		"title": "SSC",
 		"key": "ssc",
-		"site_link": "https://ssc.nic.in/",
-		"community_leader": "e814fcd6-b059-47db-afef-7242830a89e5"
+		"site_link": "https://ssc.nic.in/"
 	}
 }, {
 	"model": "quiz.examtype",
@@ -19,8 +18,7 @@
 		"description": null,
 		"title": "RRB",
 		"key": "rrb",
-		"site_link": "http://www.rrbcdg.gov.in/",
-		"community_leader": "e814fcd6-b059-47db-afef-7242830a89e5"
+		"site_link": "http://www.rrbcdg.gov.in/"
 	}
 }, {
 	"model": "quiz.examtype",
@@ -31,7 +29,6 @@
 		"description": null,
 		"title": "General",
 		"key": "general",
-		"site_link": null,
-		"community_leader": "e814fcd6-b059-47db-afef-7242830a89e5"
+		"site_link": null
 	}
 }]
