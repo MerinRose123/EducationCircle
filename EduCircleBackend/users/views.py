@@ -1,4 +1,3 @@
-import jwt
 import logging
 
 from django.contrib.auth import authenticate, login
@@ -6,7 +5,7 @@ from django.contrib.auth.signals import user_logged_in
 from django.core.exceptions import ValidationError
 from django.shortcuts import render
 from rest_framework import status
-from rest_framework_jwt.settings import api_settings
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import ListCreateAPIView, UpdateAPIView, RetrieveAPIView, GenericAPIView, DestroyAPIView, ListAPIView, CreateAPIView
 from rest_framework.generics import RetrieveUpdateAPIView
@@ -15,17 +14,12 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from EduCircleBackend import settings
 from users.serializers import UserSerializer, UserListSerializer
 from users.models import User
 from users.utils import validate_user_based_on_uid
 
 # Initialize logger
 logger = logging.getLogger(__name__)
-
-jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-
 
 @api_view(['POST'])
 @permission_classes([AllowAny, ])
@@ -42,9 +36,7 @@ def authenticate_user(request):
         user = authenticate(request,**credentials)
         if user:
             try:
-                payload = jwt_payload_handler(user)
-                # token = jwt_encode_handler(payload)
-                token = jwt.encode(payload, settings.SECRET_KEY)
+                token = str(RefreshToken.for_user(user).access_token)
                 user_details = {}
                 user_details['name'] = "%s %s" % (
                     user.first_name, user.last_name)

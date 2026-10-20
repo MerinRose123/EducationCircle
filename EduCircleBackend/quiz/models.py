@@ -4,7 +4,7 @@ import random
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 
 from common.models import BaseModel
@@ -144,4 +144,4 @@ class TestTaker(BaseModel):
         verbose_name_plural = 'Test Takers'
 
     def __str__(self):
-        return str(self.test.title) 
+        return str(self.test.title)
